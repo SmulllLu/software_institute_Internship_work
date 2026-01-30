@@ -1,53 +1,53 @@
-# January 2026
+# 2026年1月
 
-## Learning ruyi-packaging Project and Designing Automation Solutions
+## 学习ruyi-packaging项目并设计自动化解决方案
 
-### Commit: Project Initialization and Feature Design
-- Deep dive into ruyi-packaging project architecture, understanding its core goal of automating packages-index/board-image updates
-- Analyze the handling mechanism for mirror:// format URLs (using openbsd-riscv64-live as case study)
-- Identify project pain points: not all mirror URLs declared in config.toml are available, requiring resource availability detection
-- Design automation solution: periodically check URL reachability and provide query interface via FastAPI
-- Mark availability status for each mirror URL to support data-driven resource selection
+### 提交：项目初始化与功能设计
+- 深入研究ruyi-packaging项目架构，理解其自动化更新packages-index/board-image的核心目标
+- 分析mirror://格式URL的处理机制（以openbsd-riscv64-live为案例）
+- 识别项目痛点：config.toml中声明的并非所有镜像URL都可用，需要进行资源可用性检测
+- 设计自动化解决方案：定期检测URL可达性并通过FastAPI提供查询接口
+- 为每个镜像URL标记可用性状态，支持数据驱动的资源选择
 
-## Adding Automated PR Functionality
+## 添加自动化PR功能
 
-### Commit: Implement Auto PR Creation Mechanism (riko/cli/pr.py)
-- Implement automated PR creation logic in riko/cli/pr.py
-- Integrate GitHub API to support automatic branch creation and PR submission
-- Support batch processing of version updates for multiple packages
-- Implement error handling and retry mechanisms to ensure PR creation reliability
-- Add automatic generation of PR titles and descriptions
+### 提交： [实现自动PR创建机制](https://github.com/ruyisdk/ruyi-packaging/commit/afb69ab2b586f33bae369c4a11e0ec8063b3727e)
+- 在riko/cli/pr.py中实现自动化PR创建逻辑
+- 集成GitHub API，支持自动创建分支和提交PR
+- 支持批量处理多个包的版本更新
+- 实现错误处理和重试机制，确保PR创建的可靠性
+- 添加自动生成PR标题和描述的功能
 
-## Adding Scheduled Task Scheduler
+## 添加定时任务调度器
 
-### Commit: Implement Scheduled Task Functionality (riko/scheduler.py)
-- Integrate APScheduler library for cron-based task scheduling
-- Configure daily version check and PR creation task at 2:00 AM
-- Implement task status query functionality (scheduler_status)
-- Add manual task trigger interface (scheduler_trigger)
-- Complete task lifecycle management: start, stop, and status monitoring
+### 提交：[实现定时任务功能](https://github.com/ruyisdk/ruyi-packaging/commit/13a452ef864bbcd2bc933f727180d25c3930e97d)
+- 集成APScheduler库实现基于cron的任务调度
+- 配置每日凌晨2:00执行版本检查和PR创建任务
+- 实现任务状态查询功能（scheduler_status）
+- 添加手动任务触发接口（scheduler_trigger）
+- 完成任务生命周期管理：启动、停止和状态监控
 
-## Implementing SQLite Database Persistence
+## 实现SQLite数据库持久化
 
-### Commit: Database Module Implementation (riko/database/)
-- Design and implement SQLite database architecture for task history recording
-- Create recorder module for comprehensive scan process logging
-- Support nested call recording mechanism (auto-handled in check/manifests/pr)
-- Record key information: scan status, package updates, success/failure statistics
-- Implement error tracking and failure step recording functionality
+### 提交：[数据库模块实现](https://github.com/ruyisdk/ruyi-packaging/commit/824034fccbf8caf0c21635b1990761e13c29b740)
+- 设计并实现用于任务历史记录的SQLite数据库架构
+- 创建recorder模块，全面记录扫描过程
+- 支持嵌套调用记录机制（在check/manifests/pr中自动处理）
+- 记录关键信息：扫描状态、包更新、成功/失败统计
+- 实现错误追踪和失败步骤记录功能
 
-## Configuring Dependency Management and Build Tools
+## 配置依赖管理和构建工具
 
-### Commit: Add pyproject.toml Configuration
-- Select Poetry as dependency management tool for the project
-- Write comprehensive pyproject.toml configuration file
-- Define project dependencies: APScheduler, FastAPI, SQLite-related libraries
-- Configure build system and project metadata
-- Unify development environment configuration to streamline team collaboration
+### 提交：[添加pyproject.toml配置](https://github.com/ruyisdk/ruyi-packaging/commit/ffc1fbdcf10ff257375e1c6510b635554fbecd55)
+- 选择Poetry作为项目的依赖管理工具
+- 编写完整的pyproject.toml配置文件
+- 定义项目依赖：APScheduler、FastAPI、SQLite相关库
+- 配置构建系统和项目元数据
+- 统一开发环境配置，简化团队协作
 
-## FastAPI Web Service Integration
+## FastAPI Web服务集成
 
-### Commit: Implement Web Interface (riko/app.py)
-- Build RESTful API service based on FastAPI framework
-- Provide database query endpoints for history record retrieval
-- Implement scheduler status query endpoints
+### 提交：[实现Web接口](https://github.com/ruyisdk/ruyi-packaging/commit/88e4b7e4eda6e0fa19be0943cf8bf22ac78400bf)
+- 基于FastAPI框架构建RESTful API服务
+- 提供数据库查询端点，用于获取历史记录
+- 实现调度器状态查询端点
