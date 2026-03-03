@@ -21,7 +21,7 @@
 
 ## 功能修改
 
-### 提交：[实现自动对比上游版型与Ruyi-packaging仓库版型对比并更新](https://github.com/ruyisdk/ruyi-packaging/commit/34ff64365461e0d8cb7bbf14fe395f640225985c)
+### 提交：[实现自动对比上游版型与packages-index仓库版型对比并更新](https://github.com/ruyisdk/ruyi-packaging/commit/34ff64365461e0d8cb7bbf14fe395f640225985c)
   - 完成对上游版型号的整体对比，筛选出新增与删除的型号文件。通过调用manifests的版型下载和pr功能中的生成pr来协助完成version_sync功能的实现
 
 
